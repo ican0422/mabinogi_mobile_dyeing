@@ -1,0 +1,26 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+.env/
+.envrc
+
+# PyInstaller 빌드 산출물
+build/
+dist/
+*.spec
+
+# 로그 및 캐시 파일
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# VSCode 설정 (원하면 포함)
+.vscode/
+
+# 실행파일
+염색도우미.exe

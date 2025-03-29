@@ -11,10 +11,15 @@ from color_util import hex_to_rgb, total_color_distance
 from controller import random_adjust
 from detector import extract_dominant_colors, contains_all_target_colors
 
+VERSION = "염색도우미 v1.0.0"
+
 class DyeToolGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("염색 자동화 도우미")
+
+        version_label = tk.Label(root, text=VERSION, fg='gray')
+        version_label.pack(pady=(5, 0))
 
         self.hex_vars = [tk.StringVar(value="#000000"),
                          tk.StringVar(value="#FFFFFF"),
