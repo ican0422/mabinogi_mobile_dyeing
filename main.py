@@ -11,7 +11,7 @@ from color_util import hex_to_rgb, total_color_distance
 from controller import random_adjust
 from detector import extract_dominant_colors, contains_all_target_colors
 
-VERSION = "염색도우미 v1.0.0"
+VERSION = "v1.0.0"
 
 class DyeToolGUI:
     def __init__(self, root):
