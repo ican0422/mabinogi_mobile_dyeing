@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('icon.png', '.'), ('version.txt', '.')],
+    datas=[('icon.png', '.')],
     hiddenimports=[],
     hookspath=[],
     runtime_hooks=[],
@@ -27,14 +27,5 @@ exe = EXE(
     upx=True,
     console=False,
     icon='icon.png'
-)
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='염색도우미'
+    onefile=True
 )
