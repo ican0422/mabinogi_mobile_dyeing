@@ -21,7 +21,7 @@ exe = EXE(
     pyz,
     a.scripts,
     [],
-    exclude_binaries=True,
+    exclude_binaries=False,
     name='염색도우미',
     debug=False,
     bootloader_ignore_signals=False,
