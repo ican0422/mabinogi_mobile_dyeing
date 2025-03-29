@@ -3,3 +3,4 @@ pillow
 opencv-python
 numpy
 mss
+scikit-learn

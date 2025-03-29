@@ -2,9 +2,11 @@ import os
 import zipfile
 import subprocess
 import re
+import shutil
 
 EXE_NAME = "염색도우미.exe"
 TXT_NAME = "사용법.txt"
+DIST_DIR = os.path.join("dist", "염색도우미")
 
 # VERSION 문자열 추출 함수
 def extract_version():
@@ -20,21 +22,22 @@ OUTPUT_ZIP = f"염색도우미_{VERSION}.zip"
 
 # 1. PyInstaller 빌드 실행
 print(f"[빌드] PyInstaller 실행 중... (버전: {VERSION})")
-subprocess.run(["pyinstaller", "염색도우미.spec"], check=True)
+subprocess.run(["pyinstaller", "--noconfirm", "염색도우미.spec"], check=True)
 
-# 2. dist 폴더 확인 및 파일 경로 설정
-exe_path = os.path.join("dist", EXE_NAME)
-txt_path = TXT_NAME
+# 2. 빌드된 dist/염색도우미 디렉토리 확인
+if not os.path.exists(DIST_DIR):
+    raise FileNotFoundError(f"{DIST_DIR} 빌드 실패. .spec 확인 필요")
 
-if not os.path.exists(exe_path):
-    raise FileNotFoundError(f"{exe_path} 빌드 실패. .spec 확인 필요")
-if not os.path.exists(txt_path):
-    raise FileNotFoundError(f"{txt_path} 파일이 존재하지 않습니다")
+# 3. 사용법.txt dist 폴더에 복사
+shutil.copyfile(TXT_NAME, os.path.join(DIST_DIR, TXT_NAME))
 
-# 3. zip 생성
+# 4. zip 생성
 print(f"[패킹] {OUTPUT_ZIP} 압축 생성 중...")
-with zipfile.ZipFile(OUTPUT_ZIP, "w") as zipf:
-    zipf.write(exe_path, arcname=EXE_NAME)
-    zipf.write(txt_path, arcname=TXT_NAME)
+with zipfile.ZipFile(OUTPUT_ZIP, "w", zipfile.ZIP_DEFLATED) as zipf:
+    for root, _, files in os.walk(DIST_DIR):
+        for file in files:
+            full_path = os.path.join(root, file)
+            rel_path = os.path.relpath(full_path, os.path.dirname(DIST_DIR))
+            zipf.write(full_path, arcname=rel_path)
 
 print(f"✅ 빌드 및 압축 완료: {OUTPUT_ZIP}")

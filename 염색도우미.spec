@@ -5,8 +5,14 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('icon.png', '.')],  # icon만 내부에 포함
-    hiddenimports=[],
+    datas=[('icon.png', '.'), ('사용법.txt', '.')],
+    hiddenimports=[
+        'sklearn',
+        'sklearn.cluster',
+        'sklearn.utils._openmp_helpers',
+        'scipy.spatial.transform._rotation_groups',
+        'scipy.linalg.cython_blas',
+    ],
     hookspath=[],
     runtime_hooks=[],
     excludes=[],
@@ -21,14 +27,14 @@ exe = EXE(
     pyz,
     a.scripts,
     [],
-    exclude_binaries=False,
+    exclude_binaries=True,
     name='염색도우미',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
     console=False,
-    icon='icon.png',  # ✅ 쉼표 필수!
+    icon='icon.png'
 )
 
 coll = COLLECT(
@@ -38,6 +44,5 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=True,
-    upx_exclude=[],
     name='염색도우미'
 )
