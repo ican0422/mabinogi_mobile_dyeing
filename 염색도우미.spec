@@ -3,19 +3,33 @@ block_cipher = None
 
 a = Analysis(
     ['main.py'],
-    pathex=[],
+    pathex=['.'],  # 또는 절대 경로 사용 가능
     binaries=[],
-    datas=[('icon.png', '.'), ('사용법.txt', '.')],
+    datas=[
+        ('icon.png', '.'), 
+        ('사용법.txt', '.')
+    ],
     hiddenimports=[
         'sklearn',
         'sklearn.cluster',
         'sklearn.utils._openmp_helpers',
         'scipy.spatial.transform._rotation_groups',
         'scipy.linalg.cython_blas',
+
+        # ✅ 현재 사용하는 내부 모듈
+        'color_picker_ui',
+        'controller',
+        'detector',
+        'region_selector',
+        'color_util',
     ],
     hookspath=[],
     runtime_hooks=[],
-    excludes=[],
+    excludes=[
+        # ❌ 더 이상 사용하지 않는 것 있으면 여기에 명시 가능
+        'tone_selector',
+        'tone_utils',
+    ],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,

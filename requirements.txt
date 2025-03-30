@@ -4,3 +4,5 @@ opencv-python
 numpy
 mss
 scikit-learn
+pynput
+keyboard

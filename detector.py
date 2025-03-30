@@ -13,7 +13,6 @@ def extract_dominant_colors(image_np: np.ndarray, k: int = 10) -> List[Tuple[int
     centers = kmeans.cluster_centers_.astype(int)
     return [tuple(color) for color in centers]
 
-
 def contains_all_target_colors(dominants: List[Tuple[int, int, int]], targets: List[Tuple[int, int, int]], threshold: float = 30.0) -> bool:
     """
     dominant 컬러 리스트에 target 컬러들이 모두 비슷하게 포함되어 있는지 판단
